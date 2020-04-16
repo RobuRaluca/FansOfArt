@@ -7,34 +7,37 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication16.Models;
 
 namespace WebApplication16.Controllers
-{ 
-    public class UserRegistrationController : Controller
-    {
-        private readonly ApplicationUser _auc;
 
-        public UserRegistrationController(ApplicationUser auc)
+{
+    public class ResourceController : Controller
+    {
+        private readonly ApplicationResource _res;
+
+
+        public ResourceController(ApplicationResource res)
         {
-            _auc = auc;
+            _res = res;
         }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult CreateUser()
+        public IActionResult CreateResource()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateUser(User uc)
+        public IActionResult CreateResource(Resource r)
         {
-            _auc.Add(uc);
-            _auc.SaveChanges();
-            ViewBag.message = "The User " +uc.UserName+ " is saved succesfully";
+            _res.Add(r);
+            _res.SaveChanges();
+
+            ViewBag.message = "The Resource " + r.ResourceName + " is saved succesfully";
             return View();
         }
-
     }
 }

@@ -27,6 +27,7 @@ namespace WebApplication16
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationUser>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+            services.AddDbContext<ApplicationResource>(options => options.UseSqlServer(Configuration.GetConnectionString("ResourceConnection")));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -59,7 +60,8 @@ namespace WebApplication16
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=UserRegistration}/{action=CreateUser}/{id?}");
+                    //template: "{controller=UserRegistration}/{action=CreateUser}/{id?}");
+                    template: "{controller=Resource}/{action=CreateResource}/{id?}");
             });
         }
     }
