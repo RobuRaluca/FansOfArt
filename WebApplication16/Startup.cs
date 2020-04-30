@@ -11,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using WebApplication16.Models;
+using Stripe;
+using WebApplication16.Data;
+using WebApplication16.Services;
+using WebApplication16.Services.Interfaces;
 
 namespace WebApplication16
 {
@@ -23,11 +27,17 @@ namespace WebApplication16
 
         public IConfiguration Configuration { get; }
 
+        
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddDbContext<ApplicationUser>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
             services.AddDbContext<ApplicationResource>(options => options.UseSqlServer(Configuration.GetConnectionString("ResourceConnection")));
+           // services.AddDbContext<ApplicationContributionPayments>(options => options.UseSqlServer(Configuration.GetConnectionString("ContributionPaymentConnection")));
+            services.AddDbContext<ApplicationContributionPayments2>(options => options.UseSqlServer(Configuration.GetConnectionString("ContributionPaymentConnection")));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -37,11 +47,13 @@ namespace WebApplication16
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -61,7 +73,8 @@ namespace WebApplication16
                 routes.MapRoute(
                     name: "default",
                     //template: "{controller=UserRegistration}/{action=CreateUser}/{id?}");
-                    template: "{controller=Resource}/{action=CreateResource}/{id?}");
+                    template: "{controller=AddNewPayments2}/{action=Create}/{id?}");
+                   // template: "{controller=PayPal}/{action=CreateResource}/{id?}");
             });
         }
     }
