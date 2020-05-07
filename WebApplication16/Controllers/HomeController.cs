@@ -5,11 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication16.Models;
+using WebApplication16.Services;
+using WebApplication16.Services.Interfaces;
 
 namespace WebApplication16.Controllers
 {
     public class HomeController : Controller
     {
+        private IPaymentService ContributionPayments;
+
+
         public IActionResult Index()
         {
             return View();
