@@ -35,5 +35,23 @@ namespace WebApplication16.Controllers
             ViewBag.message = "The User " +uc.UserName+ " is saved succesfully";
             return View();
         }
+        [HttpGet, Authorize]
+        public ActionResult UserProfile()
+        {
+            UserProfileModel userProfileModel = AccountViewModel.GetUserProfileData(WebSecurity.CurrentUserId);
+            return View(userProfileModel);
+        }
+
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public ActionResult UserProfile(UserProfileModel userProfileModel)
+        {
+            if (ModelState.IsValid)
+            {
+                AccountViewModel.UpdateUserProfile(userProfileModel);
+                ViewBag.Message = "Profile is saved successfully.";
+            }
+
+            return View();
+        }
     }
 }
