@@ -1,0 +1,47 @@
+﻿@model WebApplication16.Models.Resource
+
+@{
+    ViewData["Title"] = "CreateResource";
+}
+
+<body>
+
+    <h2>Create Resource</h2>
+
+    <hr />
+    <div class="body-content">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="CreateResource">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ResourceName" class="control-label"></label>
+                        <input asp-for="ResourceName" class="form-control" />
+                        <span asp-validation-for="ResourceName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDateReservation" class="control-label"></label>
+                        <input asp-for="StartDateReservation" class="form-control" />
+                        <span asp-validation-for="StartDateReservation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDateReservation" class="control-label"></label>
+                        <input asp-for="EndDateReservation" class="form-control" />
+                        <span asp-validation-for="EndDateReservation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

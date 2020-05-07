@@ -12,6 +12,8 @@ namespace WebApplication16.Models
 
         }
         public DbSet <User> User { get; set; }
+        public DbSet<Admin> Admin { get; set; }
+        
     }
 }
 
