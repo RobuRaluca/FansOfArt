@@ -12,10 +12,10 @@ namespace WebApplication16.Controllers
 {
     public class AddNewPaymentsController : Controller
     {
-        //  private readonly ApplicationContributionPayments _context;
+          //private readonly ApplicationContributionPayments _context;
         private IPaymentService PaymentService;
 
-        private AddNewPaymentsController(IPaymentService ContributionPayments)
+        public AddNewPaymentsController(IPaymentService ContributionPayments)
         {
             this.PaymentService = ContributionPayments;
         }

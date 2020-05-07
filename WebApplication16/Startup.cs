@@ -36,7 +36,8 @@ namespace WebApplication16
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddDbContext<ApplicationUser>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
             services.AddDbContext<ApplicationResource>(options => options.UseSqlServer(Configuration.GetConnectionString("ResourceConnection")));
-           // services.AddDbContext<ApplicationContributionPayments>(options => options.UseSqlServer(Configuration.GetConnectionString("ContributionPaymentConnection")));
+            //services.AddDbContext<ApplicationAdmin>(options => options.UseSqlServer(Configuration.GetConnectionString("AdminConnection")));
+            // services.AddDbContext<ApplicationContributionPayments>(options => options.UseSqlServer(Configuration.GetConnectionString("ContributionPaymentConnection")));
             services.AddDbContext<ApplicationContributionPayments2>(options => options.UseSqlServer(Configuration.GetConnectionString("ContributionPaymentConnection")));
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -73,7 +74,7 @@ namespace WebApplication16
                 routes.MapRoute(
                     name: "default",
                     //template: "{controller=UserRegistration}/{action=CreateUser}/{id?}");
-                    template: "{controller=AddNewPayments2}/{action=Create}/{id?}");
+                    template: "{controller=Admin}/{action=CreateAdmin}/{id?}");
                    // template: "{controller=PayPal}/{action=CreateResource}/{id?}");
             });
         }

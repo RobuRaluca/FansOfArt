@@ -6,7 +6,7 @@ using WebApplication16.Models;
 
 namespace WebApplication16.Services.Interfaces
 {
-    interface IPaymentService
+    public interface IPaymentService
     {
         List<AddNewPayment> getAll();
         ApplicationContributionPayments2 GetContriburionByName(string name);
